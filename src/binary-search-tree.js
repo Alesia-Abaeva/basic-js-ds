@@ -1,49 +1,59 @@
-const { NotImplementedError } = require('../extensions/index.js');
-
-// const { Node } = require('../extensions/list-tree.js');
+const { Node } = require("../extensions/list-tree.js");
 
 /**
-* Implement simple binary search tree according to task description
-* using Node from extensions
-*/
+ * Implement simple binary search tree according to task description
+ * using Node from extensions
+ */
 class BinarySearchTree {
-
   root() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    if (!this.rootNode) {
+      return null;
+    }
+
+    return this.rootNode;
   }
 
-  add(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  clearRootNode() {
+    this.rootNode = null;
   }
 
-  has(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  add(value) {
+    if (!this.rootNode) {
+      this.rootNode = new Node(value);
+    }
+
+    return this.rootNode.add(value);
   }
 
-  find(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  has(value) {
+    return this.rootNode.has(value);
   }
 
-  remove(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  find(value) {
+    return this.rootNode.find(value);
+  }
+
+  remove(value) {
+    return this.rootNode.remove(value, this.rootNode, this.clearRootNode);
   }
 
   min() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    if (!this.rootNode.data) {
+      return null;
+    }
+
+    return this.rootNode.min();
   }
 
   max() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    if (!this.rootNode.data) {
+      return null;
+    }
+
+    return this.rootNode.max();
   }
 }
 
 module.exports = {
-  BinarySearchTree
+  BinarySearchTree,
 };

@@ -1,7 +1,3 @@
-const { NotImplementedError } = require('../extensions/index.js');
-
-const { ListNode } = require('../extensions/list-node.js');
-
 /**
  * Given a singly linked list of integers l and an integer k,
  * remove all elements from list l that have a value equal to k.
@@ -22,21 +18,21 @@ const { ListNode } = require('../extensions/list-node.js');
  *   }
  * }
  */
- function removeKFromList(l, k) {
-  while (l && l.value === k) {
-    l = l.next;
+function removeKFromList(linkedList, k) {
+  while (linkedList?.value === k) {
+    linkedList = linkedList.next;
   }
-  let number = l;
-  while (number && number.next) {
+  let number = linkedList;
+  while (number?.next) {
     if (number.next.value === k) {
       number.next = number.next.next;
-    } else {
-      number = number.next;
+      continue;
     }
+    number = number.next;
   }
-  return l;
+  return linkedList;
 }
 
 module.exports = {
-  removeKFromList
+  removeKFromList,
 };
