@@ -9,13 +9,16 @@ class BinarySearchTree {
   }
 
   root() {
+    if (!this.rootNode) {
+      return null;
+    } 
     return this.rootNode;
   }
 
   add(data) {
-    this.rootNode = addNode(this.rootNode, data);
+    this.rootNode = addNodes(this.rootNode, data);
 
-    function addNode(node, value) {
+    function addNodes(node, value) {
       if (!node) {
         return new Node(value);
       }
@@ -25,18 +28,18 @@ class BinarySearchTree {
       }
 
       if (value < node.data) {
-        node.left = addNode(node.left, value);
+        node.left = addNodes(node.left, value);
       } else {
-        node.right = addNode(node.right, value);
+        node.right = addNodes(node.right, value);
       }
 
       return node;
     }
   }
 
-  has(data) {
-    return searchNode(this.rootNode, data);
-    function searchNode(node, value) {
+  has(data) {    
+    return hasNode(this.rootNode, data);
+    function hasNode(node, value) {
       if (!node) {
         return false;
       }
@@ -46,14 +49,14 @@ class BinarySearchTree {
       }
 
       return value < node.data
-        ? searchNode(node.left, value)
-        : searchNode(node.right, value);
+        ? hasNode(node.left, value)
+        : hasNode(node.right, value);
     }
   }
 
   find(data) {
-    return searchNode(this.rootNode, data);
-    function searchNode(node, value) {
+    return hasNode(this.rootNode, data);
+    function hasNode(node, value) {
       if (!node) {
         return null;
       }
@@ -63,8 +66,8 @@ class BinarySearchTree {
       }
 
       return value < node.data
-        ? searchNode(node.left, value)
-        : searchNode(node.right, value);
+        ? hasNode(node.left, value)
+        : hasNode(node.right, value);
     }
   }
 
@@ -99,19 +102,19 @@ class BinarySearchTree {
   }
 
   min() {
-    let currentNode = this.rootNode;
-    while (currentNode.left) {
-      currentNode = currentNode.left;
+    let current = this.rootNode;
+    while (current.left) {
+      current = current.left;
     }
-    return currentNode.data;
+    return current.data;
   }
 
   max() {
-    let currentNode = this.rootNode;
-    while (currentNode.right) {
-      currentNode = currentNode.right;
+    let current = this.rootNode;
+    while (current.right) {
+      current = current.right;
     }
-    return currentNode.data;
+    return current.data;
   }
 }
 
