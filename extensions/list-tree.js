@@ -93,71 +93,76 @@ class Node {
     return null;
   }
 
-  remove(value, rootNode, clearRootNode) {
-    const removableNode = this.find(value);
+  remove(data) {
+    // const removableNode = {...this.find(value)};
 
-    if (!removableNode) {
-      return false;
-    }
+    // if (!removableNode) {
+    //   return false;
+    // }
 
-    const { parent } = removableNode;
-    const direction = this.findChildDirection(removableNode);
 
-    if (!removableNode.left && !removableNode.right) {
-      if (parent) {
-        parent[direction] = null;
-      } else {
-        clearRootNode();
-      }
+    // const parent = this.find(removableNode.parent?.data);
+    // const direction = this.findChildDirection(removableNode);
 
-      return true;
-    }
+    // if (!removableNode.left && !removableNode.right) {
+    //   if (parent) {
+    //     parent[direction] = null;
+    //   } else {
+    //     clearRootNode();
+    //   }
 
-    if (removableNode.left && !removableNode.right) {
-      if (parent) {
-        removableNode.left.parent = parent;
-        parent[direction] = removableNode.left;
-      } else {
-        rootNode.data = removableNode.left.data;
-        rootNode.left = removableNode.left.left;
-        rootNode.right = removableNode.left.right;
-      }
+    //   return true;
+    // }
 
-      return true;
-    }
+    // if (removableNode.left && !removableNode.right) {
+    //   if (parent) {
+    //     removableNode.left.parent = parent;
+    //     parent[direction] = removableNode.left;
+    //   } else {
+    //     rootNode.data = removableNode.left.data;
+    //     rootNode.left = removableNode.left.left;
+    //     rootNode.right = removableNode.left.right;
 
-    if (!removableNode.left && removableNode.right) {
-      if (parent) {
-        removableNode.right.parent = parent;
-        parent[direction] = removableNode.right;
-      } else {
-        rootNode.data = removableNode.right.data;
-        rootNode.left = removableNode.right.left;
-        rootNode.right = removableNode.right.right;
-      }
+    //   }
 
-      return true;
-    }
+    //   return true;
+    // }
 
-    if (!removableNode.right.left) {
-      removableNode.right.left = removableNode.left;
+    // if (!removableNode.left && removableNode.right) {
+    //   if (parent) {
+    //     removableNode.right.parent = parent;
+    //     parent[direction] = removableNode.right;
+    //   } else {
+    //     rootNode.data = removableNode.right.data;
+    //     rootNode.left = removableNode.right.left;
+    //     rootNode.right = removableNode.right.right;
+    //   }
 
-      if (parent) {
-        removableNode.right.parent = parent;
-        parent[direction] = removableNode.right;
-      } else {
-        rootNode.data = removableNode.right.data;
-        rootNode.left = removableNode.right.left;
-        rootNode.right = removableNode.right.right;
-      }
-    }
+    //   return true;
+    // }
 
-    const minNode = this.findMinNode(removableNode.right);
+    // if (!removableNode.right.left?.data) {   
+    //   if (parent) {
+    //     removableNode.left.parent = removableNode.right
+    //     removableNode.right.left = removableNode.left
+    //     removableNode.right.parent = parent
+    //     parent[direction] = removableNode.right;
+        
+    //   } else {
+    //     rootNode.data = removableNode.right.data;
+    //     rootNode.left = removableNode.right.left;
+    //     rootNode.right = removableNode.right.right;
+        
+    //   }
+    //   return true
+    // }
 
-    removableNode.data = minNode.data;
-    minNode.parent.left = minNode.right;
+    // const minNode = this.findMinNode(removableNode.right);
 
-    return true;
+    // removableNode.data = minNode.data;
+    // minNode.parent.left = minNode.right;
+
+    // return true;
   }
 
   findMinNode(node) {
