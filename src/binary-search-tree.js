@@ -1,36 +1,71 @@
 const { Node } = require("../extensions/list-tree.js");
 
-/**
- * Implement simple binary search tree according to task description
- * using Node from extensions
- */
+
+
+
 class BinarySearchTree {
-  root() {
-    if (!this.rootNode) {
-      return null;
-    }
-
-    return this.rootNode;
-  }
-
-  clearRootNode() {
+  constructor() {
     this.rootNode = null;
   }
 
-  add(value) {
-    if (!this.rootNode) {
-      this.rootNode = new Node(value);
+  root() {
+    return this.rootNode;
+  }
+
+  add(data) {
+    this.rootNode = addNode(this.rootNode, data);
+
+    function addNode(node, value) {
+      if (!node) {
+        return new Node(value);
+      }
+
+      if (node.data === value) {
+        return node;
+      }
+
+      if (value < node.data) {
+        node.left = addNode(node.left, value);
+      } else {
+        node.right = addNode(node.right, value);
+      }
+
+      return node;
     }
-
-    return this.rootNode.add(value);
   }
 
-  has(value) {
-    return this.rootNode.has(value);
+  has(data) {
+    return searchNode(this.rootNode, data);
+    function searchNode(node, value) {
+      if (!node) {
+        return false;
+      }
+
+      if (node.data === value) {
+        return true;
+      }
+
+      return value < node.data
+        ? searchNode(node.left, value)
+        : searchNode(node.right, value);
+    }
   }
 
-  find(value) {
-    return this.rootNode.find(value);
+  find(data) {
+    return searchNode(this.rootNode, data);
+    function searchNode(node, value) {
+      if (!node) {
+        return null;
+      }
+
+      if (node.data === value) {
+        return node;
+      }
+
+      return value < node.data
+        ? searchNode(node.left, value)
+        : searchNode(node.right, value);
+    }
   }
 
   remove(data) {
@@ -61,25 +96,106 @@ class BinarySearchTree {
       }
       return node;
     }
-
   }
 
   min() {
-    if (!this.rootNode.data) {
-      return null;
+    let currentNode = this.rootNode;
+    while (currentNode.left) {
+      currentNode = currentNode.left;
     }
-
-    return this.rootNode.min();
+    return currentNode.data;
   }
 
   max() {
-    if (!this.rootNode.data) {
-      return null;
+    let currentNode = this.rootNode;
+    while (currentNode.right) {
+      currentNode = currentNode.right;
     }
-
-    return this.rootNode.max();
+    return currentNode.data;
   }
 }
+
+
+/**
+ * Implement simple binary search tree according to task description
+ * using Node from extensions
+ */
+// class BinarySearchTree {
+//   root() {
+//     if (!this.rootNode) {
+//       return null;
+//     }
+
+//     return this.rootNode;
+//   }
+
+//   clearRootNode() {
+//     this.rootNode = null;
+//   }
+
+//   add(value) {
+//     if (!this.rootNode) {
+//       this.rootNode = new Node(value);
+//     }
+
+//     return this.rootNode.add(value);
+//   }
+
+//   has(value) {
+//     return this.rootNode.has(value);
+//   }
+
+//   find(value) {
+//     return this.rootNode.find(value);
+//   }
+
+//   remove(data) {
+//     this.rootNode = removeNode(this.rootNode, data);
+
+//     function minNode(node) {
+//       let currentNode = node;
+//       while (currentNode.left) {
+//         currentNode = currentNode.left;
+//       }
+//       return currentNode.data;
+//     }
+
+//     function removeNode(node, value) {
+//       if (node) {
+//         if (value < node.data) {
+//           node.left = removeNode(node.left, value);
+//         } else if (value > node.data) {
+//           node.right = removeNode(node.right, value);
+//         } else if (node.left && node.right) {
+//           node.data = minNode(node.right);
+//           // console.log(node.right.min());
+//           node.right = removeNode(node.right, node.data);
+//         } else {
+//           node = node.left || node.right;
+//         }
+//         return node;
+//       }
+//       return node;
+//     }
+
+//   }
+
+//   min() {
+//     if (!this.rootNode.data) {
+//       return null;
+//     }
+
+//     return this.rootNode.min();
+//   }
+
+//   max() {
+//     if (!this.rootNode.data) {
+//       return null;
+//     }
+
+//     return this.rootNode.max();
+//   }
+// }
 
 // values = [
 //   43, 43, 79, 64, 98, 32, 1, 45, 114, 21, 122, 466, 322, 12, 54, 12, 64, 212,
